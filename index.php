@@ -26,21 +26,10 @@
   </div>
 
 <script type="text/javascript">
-
-
   function chkFile(file1) {
-    var validExtensions = ['jpg', 'png', 'jpeg' ,'pdf'];
-    var upload = false;
-    var file_data = file1.files[0];
-    var fileName = file1.files[0].name;
-    var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
-    if (validExtensions.indexOf(fileNameExt) >= 0) {
-        upload = true;
-    }
-    if (upload) {
-        var form_data = new FormData();
-        form_data.append('file_upload', file_data);
-        var var_id = $(file1).attr('var_id');
+      var file_data = file1.files[0];
+      var form_data = new FormData();
+      form_data.append('file_upload', file_data);
         $.ajax({
             url: "upload.php",
             type: "POST",
@@ -51,7 +40,6 @@
             dataType: 'json',
             success: function(data) {
               if(data.code == 200){
-                // console.log(getRGB(data.hex))
                 $("#hexContents").val(data.hex);
                 $(file1).val(null);
               }else{
@@ -59,10 +47,7 @@
               }
             }
         });
-    } else {
-        alert("File Type Not matched Please Try image files")
-        $(file1).val(null);
-    }
+   
 }
 </script>
 
